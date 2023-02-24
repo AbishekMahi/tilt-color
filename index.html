@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tilt to Change Background Color</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #FFFFFF;
+        }
+    </style>
+    <script>
+        window.addEventListener("deviceorientation", handleOrientation, true);
+
+        function handleOrientation(event) {
+            var absolute = event.absolute;
+            var alpha = event.alpha;
+            var beta = event.beta;
+            var gamma = event.gamma;
+
+            var color = getColorFromTilt(beta, gamma);
+            document.body.style.backgroundColor = color;
+        }
+
+        function getColorFromTilt(beta, gamma) {
+            var red = Math.round((beta / 180) * 255);
+            var green = Math.round((gamma / 180) * 255);
+            var blue = Math.round(((beta + gamma) / 360) * 255);
+
+            return "rgb(" + red + "," + green + "," + blue + ")";
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Tilt to Change Background Color</h1>
+    <p>Tilt your mobile device to change the background color of this page!</p>
+</body>
+
+</html>
